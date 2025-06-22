@@ -1,0 +1,30 @@
+{
+  "name": "writeflow-standalone",
+  "version": "1.0.0",
+  "description": "WriteFlow - Downloadable Rich Text Editor",
+  "main": "dist/server/index.js",
+  "scripts": {
+    "build": "npm run build:client && npm run build:server",
+    "build:client": "cd client && npm run build",
+    "build:server": "tsc server/index.ts --outDir dist/server --target es2020 --module commonjs",
+    "start": "node dist/server/index.js",
+    "package:win": "pkg dist/server/index.js --target win --output writeflow-windows.exe",
+    "package:mac": "pkg dist/server/index.js --target macos --output writeflow-macos",
+    "package:linux": "pkg dist/server/index.js --target linux --output writeflow-linux",
+    "package:all": "npm run package:win && npm run package:mac && npm run package:linux"
+  },
+  "keywords": ["writing", "editor", "rich-text", "offline", "productivity"],
+  "author": "WriteFlow Team",
+  "license": "MIT",
+  "devDependencies": {
+    "pkg": "^5.8.1",
+    "typescript": "^5.0.0"
+  },
+  "pkg": {
+    "assets": [
+      "client/dist/**/*",
+      "node_modules/**/*"
+    ],
+    "outputPath": "dist"
+  }
+}
